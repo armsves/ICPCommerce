@@ -178,8 +178,10 @@ actor icpcommerce {
 
   public func getPrice(symbol : Text) : async Text {
     let ic : Types.IC = actor ("aaaaa-aa");
-    let host : Text = "openapi.bitrue.com";
-    let url = "https://openapi.bitrue.com/api/v1/ticker/price?symbol=" # symbol;
+    //let host : Text = "openapi.bitrue.com";
+    //let url = "https://openapi.bitrue.com/api/v1/ticker/price?symbol=" # symbol;
+    let host : Text = "api.coinbase.com";
+    let url = "https://" # host # "/v2/prices/" # symbol # "/spot";
 
     let request_headers = [
       { name = "Host"; value = host # ":443" },
@@ -193,13 +195,13 @@ actor icpcommerce {
 
     let http_request : Types.HttpRequestArgs = {
       url = url;
-      max_response_bytes = ?Nat64.fromNat(500);
+      max_response_bytes = ?Nat64.fromNat(2000);
       headers = request_headers;
       body = null;
       method = #get;
       transform = ?transform_context
     };
-    Cycles.add(55_005_600);
+    Cycles.add(86_242_400);
 
     let http_response : Types.HttpResponsePayload = await ic.http_request(http_request);
     let response_body : Blob = Blob.fromArray(http_response.body);
@@ -272,7 +274,7 @@ actor icpcommerce {
 
   public func convertUSDto(symbol : Text, price : Nat) : async Float {
     let rate : Text = await getPrice(symbol);
-    let ratePrice = await parseValue(rate, "price");
+    let ratePrice = await parseValue(rate, "amount");
     let rateValue = await textToFloat(ratePrice);
     let priceFloat = Float.fromInt(price);
     let convertedPrice = Float.div(priceFloat, rateValue);

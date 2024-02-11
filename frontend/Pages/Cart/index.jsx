@@ -23,7 +23,7 @@ function Cart({ profile, priceICP, priceBTC, priceETH, setCartItemsCount }) {
 
     const buyWithICP = async () => {
         const total = products.reduce((total, product) => total + (Number(product.quantity) * Number(product.price)), 0);
-        let response = await backendActor.convertUSDto("ICPUSDT", total);
+        let response = await backendActor.convertUSDto("ICP-USD", total);
         const balance = await window.ic?.plug?.requestBalance();
         const tokenBalance = balance.find(item => item.symbol === "ICP");
         const tokenValue = tokenBalance ? tokenBalance.amount : null;
@@ -53,7 +53,7 @@ function Cart({ profile, priceICP, priceBTC, priceETH, setCartItemsCount }) {
 
     const buyWithBTC = async () => {
         const total = products.reduce((total, product) => total + (Number(product.quantity) * Number(product.price)), 0);
-        let response = await backendActor.convertUSDto("BTCUSDT", total);
+        let response = await backendActor.convertUSDto("BTC-USD", total);
         const balance = await window.ic?.plug?.requestBalance();
         const tokenBalance = balance.find(item => item.symbol === "BTC");
         const tokenValue = tokenBalance ? tokenBalance.amount : null;
@@ -90,7 +90,7 @@ function Cart({ profile, priceICP, priceBTC, priceETH, setCartItemsCount }) {
 
     const buyWithETH = async () => {
         const total = products.reduce((total, product) => total + (Number(product.quantity) * Number(product.price)), 0);
-        let response = await backendActor.convertUSDto("ETHUSDT", total);
+        let response = await backendActor.convertUSDto("ETH-USD", total);
         const balance = await window.ic?.plug?.requestBalance();
         const tokenBalance = balance.find(item => item.symbol === "ETH");
         const tokenValue = tokenBalance ? tokenBalance.amount : null;
