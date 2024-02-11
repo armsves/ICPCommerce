@@ -83,7 +83,15 @@ function TopBar({ setIsLoading, loading, icpBalance, setCaller, profile, setProf
                 admin: true
               };
               setProfile(newAdmin);
-            } else { console.log("Welcome user"); }
+            } else { 
+              const newUser = {
+                name: principalId.toString(),
+                profilePic: null,
+                admin: false
+              };
+              setProfile(newUser);
+              console.log("Welcome user"); 
+            }
             setConnected(true);
             toast.success("Wallet Connected!");
             //getCartItemsCount();
