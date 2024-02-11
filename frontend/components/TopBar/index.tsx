@@ -74,7 +74,7 @@ function TopBar({ setIsLoading, loading, icpBalance, setCaller, profile, setProf
             //console.log("Valor de ckBTC:", ckBTCValue);
             //console.log("Valor de ckETH:", ckETHValue);
             const principalId: String = await window.ic.plug.agent.getPrincipal();
-            const admin: String = "Aam7jk-7ly4w-dh262-wtu6h-hmlvh-toclt-xpdqr-s32cx-44buf-hoy5c-jqe";
+            const admin: String = "am7jk-7ly4w-dh262-wtu6h-hmlvh-toclt-xpdqr-s32cx-44buf-hoy5c-jqe";
             if (principalId.toString() === admin.toString()) {
               console.log("Welcome admin");
               const newAdmin = {
@@ -83,7 +83,15 @@ function TopBar({ setIsLoading, loading, icpBalance, setCaller, profile, setProf
                 admin: true
               };
               setProfile(newAdmin);
-            } else { console.log("Welcome user"); }
+            } else { 
+              const newUser = {
+                name: principalId.toString(),
+                profilePic: null,
+                admin: false
+              };
+              setProfile(newUser);
+              console.log("Welcome user"); 
+            }
             setConnected(true);
             toast.success("Wallet Connected!");
             //getCartItemsCount();
