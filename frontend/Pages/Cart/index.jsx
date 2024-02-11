@@ -39,7 +39,7 @@ function Cart({ profile, priceICP, priceBTC, priceETH, setCartItemsCount }) {
             await window.ic?.plug?.requestTransfer(requestTransferArg)
                 .then(transfer => {
                     console.log('Transfer successful:', transfer);
-                    createOrder("ICP", transfer.height);
+                    createOrder("ICP", String(transfer.height));
                 })
                 .catch(error => {
                     if (String(error).includes("Error: The transaction was rejected.")) {
@@ -111,7 +111,7 @@ function Cart({ profile, priceICP, priceBTC, priceETH, setCartItemsCount }) {
             await window.ic?.plug?.requestTransfer(requestTransferArg)
                 .then(transfer => {
                     console.log('Transfer successful:', transfer);
-                    createOrder("ckETH", transfer.height);
+                    createOrder("ckETH", String(transfer.height));
                 })
                 .catch(error => {
                     if (String(error).includes("Error: The transaction was rejected.")) {
