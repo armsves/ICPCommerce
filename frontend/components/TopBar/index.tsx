@@ -59,7 +59,7 @@ function TopBar({ setIsLoading, loading, icpBalance, setCaller, profile, setProf
 
       <PlugConnect
         dark
-        title={!connected ? "Connect Wallet" : !profile.admin ? "Wallet Connected" : "Admin Connected"}
+        title={!connected ? "Connect Wallet" : !profile?.admin ? "Wallet Connected" : "Admin Connected"}
         whitelist={['bkyz2-fmaaa-aaaaa-qaaaq-cai']}
         onConnectCallback={
           async () => {
