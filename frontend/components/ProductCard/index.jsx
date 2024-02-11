@@ -11,7 +11,7 @@ function LoadingContent({ isLoading, imgSrc }) {
 
   return (
     <div className="LoadingContent">
-      <img src={"icpcommerce.jpg"} alt="Loading..." />
+      <img src={".assets/icpcommerce.jpg"} alt="Loading..." />
       <p className="loading-text">Loading...</p>
     </div>
   );

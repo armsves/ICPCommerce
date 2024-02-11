@@ -199,7 +199,7 @@ actor icpcommerce {
       method = #get;
       transform = ?transform_context
     };
-    Cycles.add(3_600_000);
+    Cycles.add(55_005_600);
 
     let http_response : Types.HttpResponsePayload = await ic.http_request(http_request);
     let response_body : Blob = Blob.fromArray(http_response.body);
