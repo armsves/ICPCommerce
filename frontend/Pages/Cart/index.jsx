@@ -43,7 +43,7 @@ function Cart({ profile, priceICP, priceBTC, priceETH, setCartItemsCount }) {
                 })
                 .catch(error => {
                     if (String(error).includes("Error: The transaction was rejected.")) {
-                        toast.error("The transaction was declined/rejected", autoClose=1200);
+                        toast.error("The transaction was declined/rejected");
                     }
                 });
         } else {
@@ -57,36 +57,35 @@ function Cart({ profile, priceICP, priceBTC, priceETH, setCartItemsCount }) {
         const balance = await window.ic?.plug?.requestBalance();
         const tokenBalance = balance.find(item => item.symbol === "BTC");
         const tokenValue = tokenBalance ? tokenBalance.amount : null;
-        //if (tokenValue >= response) {
-        const amount = (response * 100000000).toFixed(0);
-        const requestTransferArg = {
-            to: 'am7jk-7ly4w-dh262-wtu6h-hmlvh-toclt-xpdqr-s32cx-44buf-hoy5c-jqe',
-            fee: 0,
-            /*
-            token: {
-                token: 'mxzaz-hqaaa-aaaar-qaada-cai',
-                symbol: 'ckBTC',
-                usdValue: total,
-            },*/
-            from_subaccount: [],
-            created_at_time: [],
-            //amount: (Number(amount)),
-            amount: (Number(1000)),
-        };
+        if (tokenValue >= response) {
+            const amount = (response * 100000000).toFixed(0);
+            const requestTransferArg = {
+                to: 'am7jk-7ly4w-dh262-wtu6h-hmlvh-toclt-xpdqr-s32cx-44buf-hoy5c-jqe',
+                fee: 0,
+                token: {
+                    token: 'mxzaz-hqaaa-aaaar-qaada-cai',
+                    symbol: 'ckBTC',
+                    usdValue: total,
+                },
+                from_subaccount: [],
+                created_at_time: [],
+                amount: (Number(amount)),
+                //amount: (Number(1000)),
+            };
 
-        await window.ic?.plug?.requestTransfer(requestTransferArg)
-            .then(transfer => {
-                console.log('Transfer successful:', transfer);
-                createOrder("ckBTC", String(transfer.height));
-            })
-            .catch(error => {
-                if (String(error).includes("Error: The transaction was rejected.")) {
-                    toast.error("The transaction was declined/rejected", autoClose=1200);
-                }
-            });
-        //} else {
-        //toast.warning("You don't have enough balance!");
-        //}
+            await window.ic?.plug?.requestTransfer(requestTransferArg)
+                .then(transfer => {
+                    console.log('Transfer successful:', transfer);
+                    createOrder("ckBTC", String(transfer.height));
+                })
+                .catch(error => {
+                    if (String(error).includes("Error: The transaction was rejected.")) {
+                        toast.error("The transaction was declined/rejected");
+                    }
+                });
+        } else {
+            toast.warning("You don't have enough balance!");
+        }
     }
 
     const buyWithETH = async () => {
@@ -116,7 +115,7 @@ function Cart({ profile, priceICP, priceBTC, priceETH, setCartItemsCount }) {
                 })
                 .catch(error => {
                     if (String(error).includes("Error: The transaction was rejected.")) {
-                        toast.error("The transaction was declined/rejected", autoClose=1200);
+                        toast.error("The transaction was declined/rejected");
                     }
                 });
         } else {

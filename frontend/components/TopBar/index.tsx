@@ -44,17 +44,6 @@ function TopBar({ setIsLoading, loading, icpBalance, setCaller, profile, setProf
     }
   }, [profile, ImgSrc])
 
-  /*
-  const handleImageClick = () => {
-    setIsMenuOpen(!isMenuOpen)
-  }*/
-
-  /*
-  const handleLogoClick = () => {
-    setIsMenuOpen(!isMenuOpen)
-    setHamburger(!hamburger)
-  }*/
-
   return (
     <div className="TopBar">
       <div className="logo" onClick={() => navigate("/")}><img src="icpcommerce.jpg" width="100px" height="100px" alt="logo" /></div>
