@@ -63,14 +63,14 @@ function Cart({ profile, priceICP, priceBTC, priceETH, setCartItemsCount }) {
                 to: 'am7jk-7ly4w-dh262-wtu6h-hmlvh-toclt-xpdqr-s32cx-44buf-hoy5c-jqe',
                 fee: 0,
                 token: {
-                    token: 'mxzaz-hqaaa-aaaar-qaada-cai',
-                    symbol: 'ckBTC',
+                    token: 'mc6ru-gyaaa-aaaar-qaaaq-cai',
+                    symbol: 'TckBTC',
                     usdValue: total,
                 },
                 from_subaccount: [],
                 created_at_time: [],
-                amount: (Number(amount)),
-                //amount: (Number(1000)),
+                //amount: (Number(amount)),
+                amount: (Number(1000)),
             };
 
             await window.ic?.plug?.requestTransfer(requestTransferArg)

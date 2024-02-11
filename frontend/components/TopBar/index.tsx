@@ -59,7 +59,7 @@ function TopBar({ setIsLoading, loading, icpBalance, setCaller, profile, setProf
 
       <PlugConnect
         dark
-        title={!connected ? "Connect Wallet" : !profile.admin ? "Wallet Connected" : "Admin Connected"}
+        title={!connected ? "Connect Wallet" : !profile?.admin ? "Wallet Connected" : "Admin Connected"}
         whitelist={['bkyz2-fmaaa-aaaaa-qaaaq-cai']}
         onConnectCallback={
           async () => {
@@ -74,7 +74,7 @@ function TopBar({ setIsLoading, loading, icpBalance, setCaller, profile, setProf
             //console.log("Valor de ckBTC:", ckBTCValue);
             //console.log("Valor de ckETH:", ckETHValue);
             const principalId: String = await window.ic.plug.agent.getPrincipal();
-            const admin: String = "am7jk-7ly4w-dh262-wtu6h-hmlvh-toclt-xpdqr-s32cx-44buf-hoy5c-jqe";
+            const admin: String = "Aam7jk-7ly4w-dh262-wtu6h-hmlvh-toclt-xpdqr-s32cx-44buf-hoy5c-jqe";
             if (principalId.toString() === admin.toString()) {
               console.log("Welcome admin");
               const newAdmin = {
