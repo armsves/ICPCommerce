@@ -8,9 +8,8 @@ import { useAuth } from '../../auth';
 import "./index.css";
 import Footer from '../../components/Footer';
 
-function User({ setFileLoader, profile, setIsLoading, isLoading, caller, reLoad }) {
+function User({ setFileLoader, profile, setIsLoading, isLoading, caller, reLoad, categories, getCategories }) {
   const { backendActor, isAuthenticated } = useAuth();
-  const [categories, setCategories] = useState(null);
   const [products, setProducts] = useState(null);
   const [orders, setOrders] = useState(null);
 
@@ -35,19 +34,7 @@ function User({ setFileLoader, profile, setIsLoading, isLoading, caller, reLoad 
     setIsLoading(false);
   }
 
-  const getCategories = async () => {
-    //console.log('backendActor',backendActor)
-    setIsLoading(true);
-    if (backendActor) {
-      let response = await backendActor.getCategories();
-      //console.log("Categories", response)
-      await setCategories(response)
-    }
-    setIsLoading(false);
-  }
-
   useEffect(() => {
-    getCategories();
     getProducts();
     getOrders();
   }, [
@@ -62,10 +49,10 @@ function User({ setFileLoader, profile, setIsLoading, isLoading, caller, reLoad 
   return (
     <>
       <div className="addCards">
-        {!isLoading && (<CategoriesList categories={categories} getCategories={getCategories} />)}
         {!isLoading && (<NewCategory caller={caller} profile={profile} setIsLoading={setIsLoading} loading={isLoading} setFileLoader={setFileLoader} getCategories={getCategories} />)}
-        {!isLoading && (<ProductsList products={products} getProducts={getProducts} />)}
         {!isLoading && (<NewProduct caller={caller} profile={profile} setIsLoading={setIsLoading} loading={isLoading} setFileLoader={setFileLoader} categories={categories} getProducts={getProducts} />)}
+        {!isLoading && (<CategoriesList categories={categories} getCategories={getCategories} />)}
+        {!isLoading && (<ProductsList products={products} getProducts={getProducts} />)}
         {!isLoading && (<OrdersList orders={orders} getOrders={getOrders} profile={profile} />)}
       </div>
       <Footer />

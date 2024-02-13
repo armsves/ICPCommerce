@@ -79,7 +79,6 @@ img.profile-pic {
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-bottom: 5px;
 }
 
 .loader-container {
@@ -159,8 +158,8 @@ img.profile-pic {
   align-items: center;
   justify-content: space-around;
   background: linear-gradient(135deg,#f5f7fa 0%,#c3cfe2 100%);
-  margin-bottom: 5px;
-  /*padding: 5px;*/
+  /*margin-bottom: 5px;
+  padding: 5px;*/
   width: 100%;
 }
 

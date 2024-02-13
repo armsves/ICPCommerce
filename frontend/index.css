@@ -24,6 +24,7 @@ body,
 html {
   background: #E9E9E9;
   background-size: cover;
+  margin: 0;
 }
 
 .loader-container {
