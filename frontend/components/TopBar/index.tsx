@@ -47,7 +47,7 @@ function TopBar({ setIsLoading, profile, setProfile, priceBTC, priceETH, priceIC
         </div>
 
         {profile && profile.admin && (<button className="button" onClick={async () => { navigate("/admin") }}>Admin</button>)}
-
+        
         <PlugConnect
           dark
           title={!connected ? "Connect Wallet" : !profile?.admin ? "Wallet Connected" : "Admin Connected"}
