@@ -20,15 +20,24 @@ const OrdersList = ({ orders, getOrders }) => {
   return (
     <div className="OrdersList">
       <h2>Orders</h2>
+      <div className="grid-header">
+        <div style={{ textAlign: 'center' }} className="header-item">Order #</div>
+        <div style={{ textAlign: 'center' }} className="header-item">Customer Principal</div>
+        <div style={{ textAlign: 'center' }} className="header-item">Total</div>
+        <div style={{ textAlign: 'center' }} className="header-item">Token</div>
+        <div style={{ textAlign: 'center' }} className="header-item">BlockHeight</div>
+        <div style={{ textAlign: 'center' }} className="header-item">Status</div>
+        <div className="header-item"></div>
+      </div>
       <div>
         {orders && orders.length > 0 ? (orders.sort((a, b) => Number(a.id) - Number(b.id)).map(order => (
-          <div key={Number(order.id)} style={{ display: 'flex', justifyContent: 'space-between', margin: '10px', padding: '5px' }}>
-            <div style={{ marginRight: '5px' }}>{Number(order.id)}</div>
-            <div style={{ marginRight: '5px' }}>{order.customerId}</div>
-            <div style={{ marginRight: '5px' }}>{Number(order.total)}</div>
-            <div style={{ marginRight: '5px' }}>{order.symbol}</div>
-            <div style={{ marginRight: '5px' }}>{order.paymentTx}</div>
-            <div style={{ marginRight: '5px' }}>
+          <div key={Number(order.id)}  className="grid-header">
+            <div className="header-item" style={{ textAlign: 'center'}}>{Number(order.id)}</div>
+            <div className="header-item" style={{ textAlign: 'center'}}>{`${order.customerId.slice(0, 5)}...${order.customerId.slice(-3)}`}</div>
+            <div className="header-item" style={{ textAlign: 'center'}}>{Number(order.total)}</div>
+            <div className="header-item" style={{ textAlign: 'center'}}>{order.symbol}</div>
+            <div className="header-item" style={{ textAlign: 'center'}}>{order.paymentTx}</div>
+            <div className="header-item" style={{ marginRight: '5px' }}>
               {(() => {
                 //0 Payment Pending - 1 Payment Complete - 2 Order Processing - 3 Order Shipped - 4 order not processed
                 switch (Number(order.status)) {

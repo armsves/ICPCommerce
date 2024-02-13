@@ -11,7 +11,7 @@ function LoadingContent({ isLoading, imgSrc }) {
 
   return (
     <div className="LoadingContent">
-      <img src={"./icpcommerce.jpg"} alt="Loading..." />
+      <img src="icpcommerce.jpg" alt="Loading..." />
       <p className="loading-text">Loading...</p>
     </div>
   );
@@ -63,13 +63,13 @@ function ProductCard({ product, profile, setCartItemsCount }) {
   const renderContent = () => {
     // while fetching Image or Video
     if ('Image' in content && !imgSrc) {
-      return <LoadingContent isLoading={true} imgSrc={"../assets/videoLoader.png"} />;
+      return <LoadingContent isLoading={true} imgSrc={"icpcommerce.png"} />;
     } else if ('Video' in content && !videoUrl) {
-      return <LoadingContent isLoading={true} imgSrc={"../assets/videoLoader.png"} />;
+      return <LoadingContent isLoading={true} imgSrc={"icpcommerce.png"} />;
     } else if ('Image' in content) {
-      return imgSrc ? <img id={`proposal-img${Number(product.id)}`} className="content" src={imgSrc} alt="Content" /> : null;
+      return imgSrc ? <img id={`product-img${Number(product.id)}`} className="content" src={imgSrc} alt="Content" /> : null;
     } else if ('Video' in content) {
-      return videoUrl ? <video id={`proposal-video${Number(product.id)}`} className="content" src={videoUrl} controls /> : null;
+      return videoUrl ? <video id={`product-video${Number(product.id)}`} className="content" src={videoUrl} controls /> : null;
     }
   }
 

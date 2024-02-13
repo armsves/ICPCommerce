@@ -22,7 +22,7 @@
 
   .ProductPicture {
     margin-right: 10px;
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
   }
   
   .ProductPicture:last-child {
@@ -56,7 +56,7 @@
   }
   
   /*
-  .ProposalCard .card-footer {
+  .ProductCard .card-footer {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -100,7 +100,7 @@
       width: 100%;
     }
   
-    .ProposalWall {
+    .ProductWall {
       min-width: 00px;
     }
   
@@ -124,7 +124,7 @@
       max-width: 300px;
     }
   
-    .ProposalWall {
+    .ProductWall {
       min-width: 00px;
     }
   

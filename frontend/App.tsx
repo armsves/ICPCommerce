@@ -1,16 +1,10 @@
 import React, { useEffect, useState, } from "react"
-/* Connect2ic provides essential utilities for IC app development
-import "@connect2ic/core/style.css"
-/* Import canister definitions like this: */
-/* Some examples to get you started */
 import TopBar from "./components/TopBar"
 import Home from "./Pages/Home";
 import User from "./Pages/User";
 import Cart from "./Pages/Cart";
 import FileLoader from "./components/FileLoader";
-//import Modal from "./components/Modal";
 import Admin from "./Pages/Admin";
-//import FAQ from "./Pages/FAQ";
 import "./index.css"
 import { BrowserRouter as Router, Routes, Route, } from "react-router-dom"
 import { useAuth } from "./auth"
@@ -24,17 +18,15 @@ function AppPage() {
     totalChunks: 0,
   })
 
-  const [visibility, setVisibility] = useState([true, true, true])
   const { isAuthenticated, identity, login, backendActor, logout } = useAuth()
   const [isLoading, setIsLoading] = useState(true)
   const [profile, setProfile] = useState(null)
   const [caller, setCaller] = useState(null)
-  const [icpBalance, setBalance] = useState(null)
   const [priceBTC, setPriceBTC] = useState(null)
   const [priceETH, setPriceETH] = useState(null)
   const [priceICP, setPriceICP] = useState(null)
   const [cartItemsCount, setCartItemsCount] = useState(null)
-
+  const [categories, setCategories] = useState(null);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -68,15 +60,6 @@ function AppPage() {
     }
   };
 
-  useEffect(() => {
-    verifyConnectionAndAgent();
-    fetchCryptoData();
-  }, []);
-
-  useEffect(() => { }, [
-    //modal, 
-    fileloader])
-
   const [countdown, setCountdown] = useState(10)
   const updateCountdown = () => {
     let tempcount = countdown - 1;
@@ -94,10 +77,25 @@ function AppPage() {
     fetch(apiUrl + "ICPUSDT", {}).then(response => response.json()).then(data => { setPriceICP(data.price); }).catch(error => { console.log('Error fetching crypto data:', error); });
   };
 
+  const getCategories = async () => {
+    setIsLoading(true);
+    if (backendActor) {
+      let response = await backendActor.getCategories();
+      setCategories(response)
+    }
+    setIsLoading(false);
+  }
+
   useEffect(() => {
     const intervalId = setInterval(updateCountdown, 1000);
     return () => clearInterval(intervalId);
   }, [countdown]);
+
+  useEffect(() => {
+    verifyConnectionAndAgent();
+    fetchCryptoData();
+  }, []);
+
 //<Modal isOpen={modal} message={modalMsg} onClose={setModal} />
   return (
     <>
@@ -107,20 +105,18 @@ function AppPage() {
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", }}>
         <Router>
           <TopBar
-            setCaller={setCaller} icpBalance={icpBalance === null ? 0 : icpBalance} profile={profile} setProfile={setProfile}
-            setIsLoading={setIsLoading} loading={isLoading} priceICP={priceICP} priceBTC={priceBTC} priceETH={priceETH}
-            cartItemsCount={cartItemsCount}
+            profile={profile} setProfile={setProfile}
+            setIsLoading={setIsLoading} priceICP={priceICP} priceBTC={priceBTC} priceETH={priceETH}
+            cartItemsCount={cartItemsCount} categories={categories} getCategories={getCategories}
           />
           <Routes>
             <Route path="" element={
-              <Home isLoading={isLoading} profile={profile} cartItemsCount={cartItemsCount} setCartItemsCount={setCartItemsCount} />} />
+              <Home isLoading={isLoading} profile={profile} setCartItemsCount={setCartItemsCount}/>} />
             <Route path="/user" element={
               <User setFileLoader={setFileLoader} caller={caller}
                 setIsLoading={setIsLoading} profile={profile} isLoading={isLoading} reLoad={getIsReady} />} />
-            <Route
-              path="/admin"
-              element={
-                <Admin setFileLoader={setFileLoader} caller={caller}
+            <Route path="/admin" element={
+                <Admin setFileLoader={setFileLoader} caller={caller} categories={categories} getCategories={getCategories}
                   setIsLoading={setIsLoading} profile={profile} isLoading={isLoading} reLoad={getIsReady} />} />
             <Route path="/cart" element={
             <Cart profile={profile} priceICP={priceICP} priceBTC={priceBTC} priceETH={priceETH} setCartItemsCount={setCartItemsCount} />

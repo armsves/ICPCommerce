@@ -451,7 +451,11 @@ actor icpcommerce {
 
   public shared query func getCartItemsNumber(customerId : Text) : async Nat {
     var total : Nat = 0;
-    for (value in shoppingCart.vals()) { total := total + value.quantity };
+    for (value in shoppingCart.vals()) {
+      if (customerId == value.customerId) {
+        total := total + value.quantity
+      }
+    };
     return total
   };
 
